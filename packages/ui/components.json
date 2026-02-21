@@ -1,12 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",
+  "style": "radix-maia",
   "rsc": true,
   "tsx": true,
   "tailwind": {
     "config": "",
     "css": "src/styles.css",
-    "baseColor": "zinc",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
@@ -16,5 +16,9 @@
     "ui": "@repo/ui/components",
     "lib": "@repo/ui/lib",
     "hooks": "@repo/ui/hooks"
-  }
+  },
+  "iconLibrary": "remixicon",
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "rtl": false
 }

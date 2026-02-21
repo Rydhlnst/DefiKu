@@ -1,31 +1,228 @@
 @import "@repo/ui/styles.css";
 
+/* ============================================
+   Classic DeFi Theme - Uniswap/Aave Style
+   Background: Slate-950 (#020617)
+   Accent: Cyan-400 (#22d3ee) + Purple-500 (#8b5cf6)
+   Success: Emerald-400, Warning: Amber-400, Error: Rose-500
+   ============================================ */
+
+:root {
+  /* Base Colors */
+  --background: #020617;
+  --foreground: #f8fafc;
+  
+  /* Card & Popover */
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+  
+  /* Primary - Purple Gradient feel */
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  
+  /* Secondary - Slate */
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  
+  /* Muted */
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  
+  /* Accent - Cyan for highlights */
+  --accent: #22d3ee;
+  --accent-foreground: #020617;
+  
+  /* Destructive - Rose */
+  --destructive: #f43f5e;
+  --destructive-foreground: #ffffff;
+  
+  /* Border & Input */
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #8b5cf6;
+  
+  /* Radius - Slightly rounded for modern feel */
+  --radius: 0.75rem;
+  
+  /* Status Colors */
+  --success: #34d399;
+  --success-foreground: #020617;
+  --warning: #fbbf24;
+  --warning-foreground: #020617;
+  --error: #f43f5e;
+  --error-foreground: #ffffff;
+  
+  /* DeFi Specific */
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);
+  --glow-cyan: 0 0 20px rgba(34, 211, 238, 0.3);
+  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Dark mode is the default for DeFi theme */
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #22d3ee;
+  --accent-foreground: #020617;
+  --destructive: #f43f5e;
+  --destructive-foreground: #ffffff;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #8b5cf6;
+}
+
+/* Base Styles */
+html {
+  color-scheme: dark;
+}
+
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  border-color: var(--border);
+}
+
+body {
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
+a:hover {
+  opacity: 0.8;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  color: var(--foreground);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Focus Visible */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Utility Classes for DeFi */
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-border {
+    position: relative;
+  }
+  
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+  
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+  
+  .bg-defi-card {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.95) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+  }
+  
+  .text-success {
+    color: var(--success);
+  }
+  
+  .text-warning {
+    color: var(--warning);
+  }
+  
+  .text-error {
+    color: var(--error);
+  }
+  
+  .bg-success-subtle {
+    background-color: rgba(52, 211, 153, 0.1);
+  }
+  
+  .bg-warning-subtle {
+    background-color: rgba(251, 191, 36, 0.1);
+  }
+  
+  .bg-error-subtle {
+    background-color: rgba(244, 63, 94, 0.1);
+  }
+}
+
+/* Image handling for dark mode */
 .imgDark {
   display: none;
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-
   .imgLight {
     display: none;
   }
